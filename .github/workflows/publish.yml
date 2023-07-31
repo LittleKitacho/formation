@@ -1,0 +1,50 @@
+name: Publish to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu_latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Install Node.JS
+        uses: actions/setup-node@v3.7.0
+        
+      - name: Install Dependancies
+        uses: mskelton/setup-yarn@v1.4.0
+        with:
+          cache: yarn
+          
+      - name: Build Site
+        env:
+          BASE_PATH: "/formation"
+        run: |
+          yarn build
+          touch build/.nojekyll
+          
+      - name: Upload Artifacts
+        uses: actions/upload-pages-artifact@v2.0.0
+        with:
+          path: "build/"
+          
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    permissions:
+      pages: write
+      id-token: write
+      
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - name: Deploy
+        uses: actions/deploy-pages@v1
