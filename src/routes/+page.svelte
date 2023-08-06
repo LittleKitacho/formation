@@ -1,4 +1,5 @@
 <script>
+	import './global.css';
 	import MenuBar from './MenuBar.svelte';
 </script>
 
