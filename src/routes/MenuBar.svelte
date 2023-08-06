@@ -1,6 +1,6 @@
 <script>
-	import MenuButton from '$lib/MenuButton.svelte';
-	import MenuDropdown from '$lib/MenuDropdown.svelte';
+	import MenuButton from './MenuButton.svelte';
+	import MenuDropdown from './MenuDropdown.svelte';
 	import {
 		AlertTriangle,
 		Component,
@@ -8,13 +8,11 @@
 		File,
 		HelpCircle,
 		Info,
+		Music4,
 		Pen,
 		PencilLine,
 		PencilRuler
 	} from 'lucide-svelte';
-
-	/** @type {boolean} */
-	export let infoPaneVisible = false;
 
 	/** @type {string} */
 	let chartName = 'New Formation';
@@ -22,27 +20,30 @@
 
 <nav class="container">
 	<span class="left">
-		<MenuButton active={infoPaneVisible} on:click={() => (infoPaneVisible = !infoPaneVisible)}
-			><Info size="20" absoluteStrokeWidth /></MenuButton
-		>
-		<MenuDropdown>
+		<MenuDropdown tooltip="File">
 			<File size="20" absoluteStrokeWidth slot="icon" />
-			<div slot="dropdown" class="dropdown">
+			<svelte:fragment slot="dropdown">
 				<button>New Chart<span class="shortcut">Ctrl+N</span></button>
 				<button>Open<span class="shortcut">Ctrl+O</span></button>
 				<button>Save<span class="shortcut">Ctrl+S</span></button>
 				<button>Save As<span class="shortcut">Ctrl+Shift+S</span></button>
-			</div>
+			</svelte:fragment>
 		</MenuDropdown>
-		<MenuDropdown>
+		<MenuDropdown tooltip="Edit">
 			<Pen size="20" absoluteStrokeWidth slot="icon" />
-			<div slot="dropdown" class="dropdown">
+			<svelte:fragment slot="dropdown">
 				<button>Undo<span class="shortcut">Ctrl+Z</span></button>
 				<button>Redo<span class="shortcut">Ctrl+Shift+Z</span></button>
-			</div>
+			</svelte:fragment>
 		</MenuDropdown>
-		<MenuDropdown>
+		<MenuDropdown tooltip="View">
 			<Eye size="20" absoluteStrokeWidth slot="icon" />
+		</MenuDropdown>
+		<MenuDropdown tooltip="Get Help">
+			<HelpCircle size="20" absoluteStrokeWidth slot="icon" />
+			<svelte:fragment slot="dropdown">
+				<a href="/help">Get Help</a>
+			</svelte:fragment>
 		</MenuDropdown>
 	</span>
 	<span class="center">
@@ -50,17 +51,13 @@
 		<span class="chart-name-icon"><PencilLine size="12" absoluteStrokeWidth /></span>
 	</span>
 	<span class="right">
-		<MenuButton>
-			<HelpCircle size="20" absoluteStrokeWidth />
+		<MenuButton tooltip="Reference Music">
+			<Music4 size="20" absoluteStrokeWidth />
 		</MenuButton>
-		<MenuButton>
+		<MenuButton tooltip="Groups & Points">
 			<Component size="20" absoluteStrokeWidth />
 		</MenuButton>
-		<MenuButton wide>
-			<AlertTriangle size="20" absoluteStrokeWidth />
-			2
-		</MenuButton>
-		<MenuButton>
+		<MenuButton tooltip="Preview Commands" tooltipOffset={-60}>
 			<PencilRuler size="20" absoluteStrokeWidth />
 		</MenuButton>
 	</span>
@@ -68,11 +65,14 @@
 
 <style>
 	.container {
+		padding: 0 0.2rem;
 		display: flex;
-		height: 100%;
-		width: 100%;
+		height: 3.1rem;
+		width: 100vw;
 		justify-content: space-between;
+		background-color: var(--surface);
 		z-index: 2;
+		border-bottom: 0.05rem solid var(--outline);
 	}
 	.left,
 	.center,
@@ -82,24 +82,6 @@
 	}
 	.left > * {
 		margin-top: 0.1rem;
-	}
-
-	.dropdown > * {
-		display: flex;
-		height: 2rem;
-		padding: 0.4rem 1rem;
-		width: 100%;
-		min-width: max-content;
-		background: none;
-		color: var(--content);
-		border: none;
-		border-radius: 0.5rem;
-		justify-content: space-between;
-		align-content: center;
-	}
-	.dropdown > *:hover {
-		background-color: var(--primary);
-		color: var(--primary-content) !important;
 	}
 	.shortcut {
 		margin-left: 1rem;
