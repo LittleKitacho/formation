@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 * {
+	box-sizing: border-box;
+	font-family: Poppins, sans-serif;
+}
+
+:root {
 	--surface: white;
 	--surface-tint: rgb(255, 198, 198);
 	--content: black;
@@ -9,12 +14,12 @@
 	--primary: rgb(255, 52, 52);
 	--primary-highlight: rgb(255, 61, 61);
 	--primary-content: white;
-	--shadow: rgba(70, 70, 70, 0.65);
-
-	font-family: Poppins, sans-serif;
+	--shadow: rgba(56, 17, 17, 0.5);
+	--tooltip: rgb(52, 52, 52);
+	--tooltip-content: white;
 }
 @media (prefers-color-scheme: dark) {
-	* {
+	:root {
 		--surface: rgb(18, 18, 18);
 		--surface-tint: rgb(97, 15, 15);
 		--content: white;
