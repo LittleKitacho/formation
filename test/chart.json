@@ -1,0 +1,41 @@
+{
+  "points": [
+    {
+      "id": "drum1",
+      "label": "A",
+      "name": "Snare 1",
+      "sx": 24,
+      "sy": 31,
+      "sd": "HOME"
+    },
+    {
+      "id": "drum2",
+      "label": "B",
+      "name": "Snare 2",
+      "sx": 24,
+      "sy": 29,
+      "sd": "HOME"
+    },
+    {
+      "id": "drum3",
+      "label": "C",
+      "name": "Snare 3",
+      "sx": 24,
+      "sy": 27,
+      "sd": "HOME"
+    }
+  ],
+  "squads": [],
+  "groups": [],
+  "sets": [
+    {
+      "id": "<CUID>",
+      "counts": 8,
+      "moves": [
+        {
+          ""
+        }
+      ]
+    }
+  ]
+}
